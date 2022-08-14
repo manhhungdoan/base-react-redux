@@ -8,6 +8,9 @@ class DisplayInfor extends React.Component {
             isShowList: !this.state.isShowList
         })
     }
+    deleteUser = (id) => {
+        this.props.handleDeleteUser(id);
+    }
     render() {
         const { listUsers } = this.props;
         return (
@@ -20,7 +23,7 @@ class DisplayInfor extends React.Component {
                         {
                             listUsers.map((user) => {
                                 return (
-                                    <div key={user.id} className={+user.age ? "green" : "red"}>
+                                    <div onClick={() => this.deleteUser(user.id)} className={+user.age ? "green" : "red"}>
                                         My name: {user.name}
                                         <br></br>
                                         Age: {user.age}

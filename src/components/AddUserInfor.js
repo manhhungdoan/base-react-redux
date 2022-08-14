@@ -1,5 +1,5 @@
 import React from "react";
-class UserInfor extends React.Component {
+class AddUserInfor extends React.Component {
     //JSX
     state = {
         name: 'mhung',
@@ -28,19 +28,20 @@ class UserInfor extends React.Component {
     }
     handleOnSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        this.props.handleAddNewUser({
+            id: Math.floor((Math.random() * 100) + 1) + 'random',
+            name: this.state.name,
+            age: this.state.age
+        })
     }
     render() {
         return (
             <div>
-                <div>My name is {this.state.name} from {this.state.address}</div>
+                <div>My name is {this.state.name} age: {this.state.age}</div>
                 <button onClick={(event) => { this.handClick(event) }}>Click me</button>
                 <form onSubmit={(event) => this.handleOnSubmit(event)}>
                     <label>Your name: </label>
                     <input value={this.state.name} type='text' onChange={(event) => this.handOnchange(event)}></input>
-                    <button>Submit</button>
-                </form>
-                <form onSubmit={(event) => this.handleOnSubmit(event)}>
                     <label>Your age: </label>
                     <input value={this.state.age} type='text' onChange={(event) => this.handleChangeAge(event)}></input>
                     <button>Submit</button>
@@ -49,4 +50,4 @@ class UserInfor extends React.Component {
         )
     }
 }
-export default UserInfor;
+export default AddUserInfor;
