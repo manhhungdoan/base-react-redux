@@ -49,5 +49,4 @@ class UserInfor extends React.Component {
         )
     }
 }
-
 export default UserInfor;
