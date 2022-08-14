@@ -4,18 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { increaseCounter, decreaseCounter } from './redux/action/counterAction';
 import MyComponent from './components/MyComponent';
 import React from 'react';
-
 class App extends React.Component {
   state = {
     name: 'mhung',
     address: 'Phu Tho',
     age: 21
   }
+  handClick() {
+    console.log('click me', this.state.name);
+    this.setState({
+      name: 'Doan Manh Hung'
+    });
+  }
   render() {
     return (
       <div>
         Hello World
         <div>My name is {this.state.name} from {this.state.address}</div>
+        <button onClick={(event) => { this.handClick(event) }}>Click me</button>
         <MyComponent />
       </div>
     )
@@ -43,5 +49,4 @@ class App extends React.Component {
 //     // </div>
 //   );
 // }
-
 export default App;
