@@ -17,10 +17,10 @@ class MyComponent extends React.Component {
         })
     }
     handleDeleteUser = (id) => {
-        let currentUser = _.clone(this.state.listUsers);
-        currentUser = currentUser.filter(user => user.id !== id)
+        let listUsersClone = this.state.listUsers;
+        listUsersClone = listUsersClone.filter(item => item.id !== id);
         this.setState({
-            listUsers: currentUser
+            listUsers: listUsersClone
         })
     }
     render() {

@@ -21,7 +21,7 @@ class DisplayInfor extends React.Component {
                 {JSON.stringify(test_variables)}
                 <br></br>
                 <div className="display-infor-container">
-                    <img src={logo} />
+                    {/* <img src={logo} /> */}
                     <div>
                         <button onClick={() => this.handleShowHide()}>{this.state.isShowList === true ? "Hide List Users" : "Show List Users"}</button>
                     </div>
@@ -30,10 +30,13 @@ class DisplayInfor extends React.Component {
                             {
                                 listUsers.map((user) => {
                                     return (
-                                        <div onClick={() => this.deleteUser(user.id)} className={+user.age > 18 ? "green" : "red"}>
+                                        <div className={+user.age > 18 ? "green" : "red"}>
                                             My name: {user.name}
                                             <br></br>
                                             Age: {user.age}
+                                            <div>
+                                                <button onClick={() => this.deleteUser(user.id)}>Delete</button>
+                                            </div>
                                             <hr></hr>
                                         </div>
                                     )
