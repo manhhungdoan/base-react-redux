@@ -2,6 +2,16 @@ import React from "react";
 import './DisplayInfor.scss';
 import logo from './../logo.svg';
 class DisplayInfor extends React.Component {
+
+    //oop style
+    // constructor(props) {
+    //     super(props);
+    //     state = {
+    //         isShowList: true
+    //     }
+    // }
+
+    //babel compiler
     state = {
         isShowList: true
     }
