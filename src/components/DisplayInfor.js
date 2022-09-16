@@ -15,8 +15,11 @@ class DisplayInfor extends React.Component {
     }
     render() {
         const { listUsers } = this.props;
+        const test_variables = { name: 'mhung', age: 18 }
         return (
             <>
+                {JSON.stringify(test_variables)}
+                <br></br>
                 <div className="display-infor-container">
                     <img src={logo} />
                     <div>
