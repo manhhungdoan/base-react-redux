@@ -1,19 +1,33 @@
 import React from "react";
 import './DisplayInfor.scss';
-import logo from './../logo.svg';
+// import logo from './../logo.svg';
 class DisplayInfor extends React.Component {
 
     //oop style
-    // constructor(props) {
-    //     super(props);
-    //     state = {
-    //         isShowList: true
-    //     }
+    constructor(props) {
+        console.log('>> call constructor 1');
+        super(props);
+        this.state = {
+            isShowList: true
+        }
+    }
+    //babel compiler
+    // state = {
+    //     isShowList: true
     // }
 
-    //babel compiler
-    state = {
-        isShowList: true
+    componentDidMount() {
+        console.log('>>Call me component did mount');
+        setTimeout(() => {
+            document.title('mhung did mount');
+        }, 3000);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('>>call me comp did update', this.props, prevProps)
+        if (this.props.listUsers !== prevProps.listUsers) {
+            alert('you are 4')
+        }
     }
     handleShowHide = () => {
         this.setState({
@@ -24,6 +38,7 @@ class DisplayInfor extends React.Component {
         this.props.handleDeleteUser(id);
     }
     render() {
+        console.log("call me render")
         const { listUsers } = this.props;
         const test_variables = { name: 'mhung', age: 18 }
         return (
