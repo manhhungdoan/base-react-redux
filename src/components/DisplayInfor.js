@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './DisplayInfor.scss';
 // import logo from './../logo.svg';
 // class DisplayInfor extends React.Component {
@@ -65,17 +65,29 @@ import './DisplayInfor.scss';
 //     }
 // }
 
+
+//Chuyển class sang function sẽ không có this
 const DisplayInfor = (props) => {
     const { listUsers } = props;//object
+
+    const [isShowHideListUser, setShowHideListUser] = useState(true);
+    //Destructuring assignment
+    // this.state = {
+    //     isShowHideListUser = true;
+    // }
+
+    const handleShowHideListUser = () => {
+        setShowHideListUser(!isShowHideListUser);
+    }
+
     return (
         <>
             <br></br>
             <div className="display-infor-container">
-                {/* <img src={logo} /> */}
-                {/* <div>
-                        <button onClick={() => this.handleShowHide()}>{this.state.isShowList === true ? "Hide List Users" : "Show List Users"}</button>
-                    </div> */}
-                {true &&
+                <div>
+                    <button onClick={() => handleShowHideListUser()}>{isShowHideListUser === true ? "Hide list user" : "Show list users"}</button>
+                </div>
+                {isShowHideListUser &&
                     <div>
                         {
                             listUsers.map((user) => {
