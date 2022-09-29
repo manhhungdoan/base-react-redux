@@ -10,12 +10,80 @@ body {
 
 .app-container {
   .header-container {
-    .navbar-nav {
+    padding-top: 10px;
+
+    .btn-login {
+      border-radius: 5px;
+      padding: 0 15px;
+      border-color: #636363;
+      margin-right: 20px;
+      height: 40px;
+    }
+
+    .btn-signup {
+      border-radius: 5px;
+      padding: 0 15px;
+      border-color: #353535;
+      background-color: #353535;
+      color: white;
+      height: 40px;
+
+      &:hover {
+        background-color: black;
+      }
+    }
+
+    .navbar {
+      z-index: 10;
+      background-color: rgba($color: #000000, $alpha: 0.0) !important;
+
       .nav-link {
         &.active {
           color: #00bff0;
         }
       }
     }
+  }
+
+  .homepage-container {
+    .homepage-content {
+      position: relative;
+      padding: 100px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .title-one {
+        font-size: 40px;
+        font-weight: 600px;
+      }
+
+      .title-two {
+        font-size: 25px;
+        color: gray;
+      }
+
+      .title-three {
+        button {
+          border-radius: 5px;
+          padding: 0 15px;
+          border-color: #353535;
+          background-color: #353535;
+          color: white;
+          height: 40px;
+
+          &:hover {
+            background-color: black;
+          }
+        }
+      }
+    }
+  }
+
+  video {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
   }
 }
