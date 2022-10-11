@@ -10,13 +10,9 @@
     .user-content {
         .btn-add-new {
             margin: 25px 0px;
-            button {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 5;
-            }
-
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
     }
 }
