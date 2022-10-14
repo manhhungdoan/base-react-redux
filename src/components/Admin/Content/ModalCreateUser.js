@@ -50,11 +50,11 @@ const ModalCreateUser = (props) => {
 
     }
     const handleSubmitCreateUser = async () => {
-        // const isValidEmail = validateEmail(email);
+        const isValidEmail = validateEmail(email);
         const isValidPassword = validatePassword(password);
-        // if (!isValidEmail) {
-        //     toast.error("Invalid Email");
-        // }
+        if (!isValidEmail) {
+            toast.error("Invalid Email");
+        }
         if (!isValidPassword) {
             toast.error("Invalid Password");
         }
@@ -63,6 +63,7 @@ const ModalCreateUser = (props) => {
         if (res && res.EC === 0) {
             toast.success(res.EM);
             handleClose();
+            await props.fetchListUsers();
         }
         if (res && res.EC !== 0) {
             toast.error(res.EM);
