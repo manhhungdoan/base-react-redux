@@ -4,11 +4,11 @@ import Modal from 'react-bootstrap/Modal';
 import './ManageUser.scss';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from 'react-toastify';
-import { postCreateUser } from '../../../services/apiServices';
+import { putUpdateUser } from '../../../services/apiServices';
 import { useEffect } from 'react';
 import _ from 'lodash'
 const ModalUpdateUser = (props) => {
-    const { show, setShow, dataUpdate } = props;
+    const { show, setShow, dataUpdate, setDataUpdate } = props;
     const handleClose = () => {
         setShow(false)
         setEmail("")
@@ -17,6 +17,7 @@ const ModalUpdateUser = (props) => {
         setRole("USER")
         setImage("")
         setPreviewing("")
+        setDataUpdate("");
     };
 
     const [email, setEmail] = useState("");
@@ -31,6 +32,7 @@ const ModalUpdateUser = (props) => {
             //updateState
             setEmail(dataUpdate.email)
             setUsername(dataUpdate.username)
+            setPassword(dataUpdate.password)
             setRole(dataUpdate.role)
             setImage("")
             if (dataUpdate.image) {
@@ -48,33 +50,33 @@ const ModalUpdateUser = (props) => {
         }
     }
 
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-    };
+    // const validateEmail = (email) => {
+    //     return String(email)
+    //         .toLowerCase()
+    //         .match(
+    //             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    //         );
+    // };
 
-    const validatePassword = (password) => {
+    // const validatePassword = (password) => {
 
-        return /[A-Z]/.test(password) &&
-            /[a-z]/.test(password) &&
-            /[0-9]/.test(password) &&
-            /[^A-Za-z0-9]/.test(password) &&
-            password.length > 4;
+    //     return /[A-Z]/.test(password) &&
+    //         /[a-z]/.test(password) &&
+    //         /[0-9]/.test(password) &&
+    //         /[^A-Za-z0-9]/.test(password) &&
+    //         password.length > 4;
 
-    }
+    // }
     const handleSubmitUpdateUser = async () => {
-        const isValidEmail = validateEmail(email);
-        const isValidPassword = validatePassword(password);
-        if (!isValidEmail) {
-            toast.error("Invalid Email");
-        }
-        if (!isValidPassword) {
-            toast.error("Invalid Password");
-        }
-        let res = await postCreateUser(email, password, username, role, image);
+        // const isValidEmail = validateEmail(email);
+        // const isValidPassword = validatePassword(password);
+        // if (!isValidEmail) {
+        //     toast.error("Invalid Email");
+        // }
+        // if (!isValidPassword) {
+        //     toast.error("Invalid Password");
+        // }
+        let res = await putUpdateUser(dataUpdate.id, username, role, image);
         // console.log('componet respone: ', res)
         if (res && res.EC === 0) {
             toast.success(res.EM);
