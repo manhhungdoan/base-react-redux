@@ -12,7 +12,9 @@ const postCreateUser = (email, password, username, role, image) => {
 const getAllUsers = () => {
     return axios.get('api/v1/participant/all')
 }
-
+const getUserWithPaginate = (page, limit) => {
+    return axios.get(`api/v1/participant?page=${page}&limit=${limit}`)
+}
 const putUpdateUser = (id, username, role, image) => {
     const data = new FormData();
     data.append('id', id);
@@ -26,4 +28,4 @@ const deleteUser = (userId) => {
     return axios.delete('api/v1/participant', { data: { id: userId } })
 }
 
-export { postCreateUser, getAllUsers, putUpdateUser, deleteUser }
+export { postCreateUser, getAllUsers, putUpdateUser, deleteUser, getUserWithPaginate }

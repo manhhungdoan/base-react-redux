@@ -1,5 +1,14 @@
+import ReactPaginate from 'react-paginate';
 const TableUsers = (props) => {
-    const { listUsers } = props;
+    const { listUsers, pageCount } = props;
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+        props.fetchListUsersWithPaginate(+event.selected + 1)
+        console.log(
+            `User requested page number ${event.selected}`
+        );
+    };
+
     return (
         <>
             <table className="table table-hover table-bordered">
@@ -36,6 +45,28 @@ const TableUsers = (props) => {
                         </tr>}
                 </tbody>
             </table>
+            <div className='user-pagination d-flex justify-content-end'>
+                <ReactPaginate
+                    nextLabel="Next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    marginPagesDisplayed={2}
+                    pageCount={pageCount}
+                    previousLabel="< Prev"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                />
+            </div>
         </>
     )
 }
