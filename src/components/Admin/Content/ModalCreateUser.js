@@ -6,7 +6,7 @@ import { FcPlus } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 import { postCreateUser } from '../../../services/apiServices';
 const ModalCreateUser = (props) => {
-    const { show, setShow } = props;
+    const { show, setShow, setCurrentPage, fetchListUsersWithPaginate } = props;
     const handleClose = () => {
         setShow(false)
         setEmail("")
@@ -59,11 +59,11 @@ const ModalCreateUser = (props) => {
             toast.error("Invalid Password");
         }
         let res = await postCreateUser(email, password, username, role, image);
-        console.log('componet respone: ', res)
         if (res && res.EC === 0) {
             toast.success(res.EM);
             handleClose();
-            await props.fetchListUsers();
+            setCurrentPage(1);
+            await fetchListUsersWithPaginate(1);
         }
         if (res && res.EC !== 0) {
             toast.error(res.EM);

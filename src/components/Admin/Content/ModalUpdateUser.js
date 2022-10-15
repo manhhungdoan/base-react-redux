@@ -8,7 +8,14 @@ import { putUpdateUser } from '../../../services/apiServices';
 import { useEffect } from 'react';
 import _ from 'lodash'
 const ModalUpdateUser = (props) => {
-    const { show, setShow, dataUpdate, setDataUpdate } = props;
+    const {
+        show,
+        setShow,
+        dataUpdate,
+        setDataUpdate,
+        fetchListUsersWithPaginate,
+        currentPage
+    } = props;
     const handleClose = () => {
         setShow(false)
         setEmail("")
@@ -43,45 +50,18 @@ const ModalUpdateUser = (props) => {
         console.log(dataUpdate);
     }, [dataUpdate])
     const handleUploadImage = (event) => {
-        // console.log("upload file", event.target.files[0])
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewing(URL.createObjectURL(event.target.files[0]));
             setImage(event.target.files[0])
         }
     }
-
-    // const validateEmail = (email) => {
-    //     return String(email)
-    //         .toLowerCase()
-    //         .match(
-    //             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    //         );
-    // };
-
-    // const validatePassword = (password) => {
-
-    //     return /[A-Z]/.test(password) &&
-    //         /[a-z]/.test(password) &&
-    //         /[0-9]/.test(password) &&
-    //         /[^A-Za-z0-9]/.test(password) &&
-    //         password.length > 4;
-
-    // }
     const handleSubmitUpdateUser = async () => {
-        // const isValidEmail = validateEmail(email);
-        // const isValidPassword = validatePassword(password);
-        // if (!isValidEmail) {
-        //     toast.error("Invalid Email");
-        // }
-        // if (!isValidPassword) {
-        //     toast.error("Invalid Password");
-        // }
         let res = await putUpdateUser(dataUpdate.id, username, role, image);
-        // console.log('componet respone: ', res)
         if (res && res.EC === 0) {
             toast.success(res.EM);
             handleClose();
-            await props.fetchListUsers();
+            console.log(currentPage);
+            await fetchListUsersWithPaginate(currentPage);
         }
         if (res && res.EC !== 0) {
             toast.error(res.EM);
@@ -90,10 +70,6 @@ const ModalUpdateUser = (props) => {
     }
     return (
         <>
-            {/* <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button> */}
-
             <Modal
                 show={show}
                 onHide={handleClose}
