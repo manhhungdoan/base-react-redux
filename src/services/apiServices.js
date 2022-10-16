@@ -28,4 +28,14 @@ const deleteUser = (userId) => {
     return axios.delete('api/v1/participant', { data: { id: userId } })
 }
 
-export { postCreateUser, getAllUsers, putUpdateUser, deleteUser, getUserWithPaginate }
+const postLogin = (userEmail, usePassword) => {
+    return axios.post('/api/v1/login', { email: userEmail, password: usePassword })
+}
+export {
+    postCreateUser,
+    getAllUsers,
+    putUpdateUser,
+    deleteUser,
+    getUserWithPaginate,
+    postLogin
+}
