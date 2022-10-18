@@ -47,7 +47,6 @@ const ModalCreateUser = (props) => {
             /[0-9]/.test(password) &&
             /[^A-Za-z0-9]/.test(password) &&
             password.length > 4;
-
     }
     const handleSubmitCreateUser = async () => {
         const isValidEmail = validateEmail(email);

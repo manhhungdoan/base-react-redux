@@ -3,19 +3,26 @@ import './Login.scss';
 import { useNavigate } from 'react-router-dom';
 import { postLogin } from '../../../services/apiServices';
 import { toast } from 'react-toastify';
+import { BsEyeSlash, BsEye } from 'react-icons/bs';
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
     const handleBackToHome = () => {
         navigate("/");
+    }
+    const handleBtnSignUp = () => {
+        navigate("/signup");
+    }
+    const handleVisible = () => {
+        setIsVisible(!isVisible);
     }
     const handleLogin = async () => {
         //validate
 
         //submit
         let res = await postLogin(email, password);
-        console.log('test login >>', res);
         if (res && res.EC === 0) {
             toast.success(res.EM);
         }
@@ -27,9 +34,9 @@ const Login = () => {
         <div className='login-container'>
             <div className='header'>
                 Don't have an account yet?
-                <button className='btn-signup'>Sign Up</button>
+                <button className='btn-signup' onClick={() => handleBtnSignUp()}>Sign Up</button>
             </div>
-            <div className='title col-6 col-md-2 text-center mx-auto'>
+            <div className='title col-6 col-md-2 text-center mx-auto' onClick={() => handleBackToHome()}>
                 mhungit
             </div>
             <div className='welcome text-center col-6 col-md-2 mx-auto'>
@@ -47,17 +54,18 @@ const Login = () => {
                         placeholder="Email"
                     ></input>
                 </div>
-                <div className='form-group'>
+                <div className='form-group input-field'>
                     <label>Password</label>
-                    <div className='input-group'>
-                        <input
-                            type="password"
-                            className="form-control"
-                            value={password}
-                            onChange={(event) => setPassword(event.target.value)}
-                            placeholder="Password"
-                        />
-                    </div>
+                    <input
+                        type={isVisible ? "text" : "password"}
+                        className="form-control"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        placeholder="Password"
+                    />
+                    <button className='btn-visible-password' onClick={() => handleVisible()}>
+                        {isVisible ? <BsEyeSlash /> : <BsEye />}
+                    </button>
                 </div>
                 <span className='forgot-password'>Forgot password ?</span>
                 <div>

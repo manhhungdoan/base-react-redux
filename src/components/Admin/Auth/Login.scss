@@ -14,6 +14,7 @@
     .title {
         font-size: 36px;
         padding: 10px;
+        cursor: pointer;
     }
 
     .welcome {
@@ -25,6 +26,22 @@
         flex-direction: column;
         gap: 15px;
         font-size: 18px;
+
+        .input-field {
+            position: relative;
+
+            .btn-visible-password {
+                border: none;
+                padding: 0;
+                background: none;
+                color: gray;
+                position: absolute;
+                top: 32px;
+                right: 10px;
+                cursor: pointer;
+            }
+
+        }
 
         .btn-login {
             width: 100%;
