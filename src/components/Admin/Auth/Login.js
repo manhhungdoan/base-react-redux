@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { postLogin } from '../../../services/apiServices';
 import { toast } from 'react-toastify';
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { doLogin } from '../../../redux/action/userAction';
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleBackToHome = () => {
         navigate("/");
     }
@@ -35,6 +38,7 @@ const Login = () => {
         if (isValidEmail) {
             let res = await postLogin(email, password);
             if (res && res.EC === 0) {
+                dispatch(doLogin(res));
                 toast.success(res.EM);
                 navigate("/");
             }
