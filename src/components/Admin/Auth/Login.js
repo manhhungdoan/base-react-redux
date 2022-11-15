@@ -18,17 +18,31 @@ const Login = () => {
     const handleVisible = () => {
         setIsVisible(!isVisible);
     }
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
     const handleLogin = async () => {
         //validate
-
+        const isValidEmail = validateEmail(email);
+        if (!isValidEmail) {
+            toast.error("Invalid Email");
+        }
         //submit
-        let res = await postLogin(email, password);
-        if (res && res.EC === 0) {
-            toast.success(res.EM);
+        if (isValidEmail) {
+            let res = await postLogin(email, password);
+            if (res && res.EC === 0) {
+                toast.success(res.EM);
+                navigate("/");
+            }
+            if (res && res.EC !== 0) {
+                toast.error(res.EM);
+            }
         }
-        if (res && res.EC !== 0) {
-            toast.error(res.EM);
-        }
+
     }
     return (
         <div className='login-container'>
