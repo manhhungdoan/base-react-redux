@@ -6,12 +6,15 @@ import { toast } from 'react-toastify';
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../../redux/action/userAction';
+import { ImSpinner6 } from 'react-icons/im';
+
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [isLoadingData, setIsLoadingData] = useState(false);
     const handleBackToHome = () => {
         navigate("/");
     }
@@ -34,16 +37,20 @@ const Login = () => {
         if (!isValidEmail) {
             toast.error("Invalid Email");
         }
+
+        setIsLoadingData(true);
         //submit
         if (isValidEmail) {
             let res = await postLogin(email, password);
             if (res && res.EC === 0) {
                 dispatch(doLogin(res));
                 toast.success(res.EM);
+                setIsLoadingData(false);
                 navigate("/");
             }
             if (res && res.EC !== 0) {
                 toast.error(res.EM);
+                setIsLoadingData(false);
             }
         }
 
@@ -87,7 +94,14 @@ const Login = () => {
                 </div>
                 <span className='forgot-password'>Forgot password ?</span>
                 <div>
-                    <button className='btn-login' onClick={() => handleLogin()}>Login to mhungit</button>
+                    <button
+                        className='btn-login'
+                        onClick={() => handleLogin()}
+                        disabled={isLoadingData}
+                    >
+                        {isLoadingData === true && <ImSpinner6 className='loaderIcon'></ImSpinner6>}
+                        Login to mhungit
+                    </button>
                 </div>
                 <div className='text-center'>
                     <span className='back' onClick={() => handleBackToHome()}> &#60; Back to Homepage</span>
