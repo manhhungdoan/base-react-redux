@@ -9,6 +9,26 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Signup from './components/Admin/Auth/Signup';
 import ListQuiz from './components/User/ListQuiz';
+import DetailQuiz from './components/User/DetailQuiz';
+const NotFound = () => {
+    return (
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="error-template">
+                        <h1>
+                            Oops!</h1>
+                        <h2>
+                            404 Not Found</h2>
+                        <div class="error-details">
+                            Sorry, an error has occured, Requested page not found!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 const Layout = (props) => {
     return (
         <>
@@ -17,12 +37,14 @@ const Layout = (props) => {
                     <Route index element={<HomePage />}></Route>
                     <Route path='users' element={<ListQuiz />}></Route>
                 </Route>
+                <Route path='quiz/:id' element={<DetailQuiz />}></Route>
                 <Route path='/admin' element={<Admin />}>
                     <Route index element={<DashBoard />}></Route>
                     <Route path='manage-user' element={<ManageUser />}></Route>
                 </Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/signup' element={<Signup />}></Route>
+                <Route path='*' element={<NotFound />}></Route>
             </Routes>
             <ToastContainer
                 position="top-right"

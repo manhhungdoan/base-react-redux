@@ -39,6 +39,10 @@ const postSignup = (userEmail, userName, userPassword) => {
 const getQuizByUser = () => {
     return axios.get('api/v1/quiz-by-participant');
 }
+
+const getDataQuiz = (quizId) => {
+    return axios.get(`/api/v1/questions-by-quiz?quizId=${quizId}`);
+}
 export {
     postCreateUser,
     getAllUsers,
@@ -47,5 +51,6 @@ export {
     getUserWithPaginate,
     postLogin,
     postSignup,
-    getQuizByUser
+    getQuizByUser,
+    getDataQuiz
 }
