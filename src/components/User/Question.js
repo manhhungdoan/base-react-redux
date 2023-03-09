@@ -3,9 +3,13 @@ import { getQuizByUser } from "../../services/apiServices";
 import './DetailQuiz.scss';
 const Question = (props) => {
     const { data, index } = props;
-    console.log("check dataQuiz: ", data);
     if (_.isEmpty(data)) {
         return (<></>)
+    }
+    const handleHanleCheckbox = (event, aId, qId) => {
+        // console.log("check: ", event.target.checked)
+        // console.log("data props:", aId, qId)
+        props.handleCheckbox(aId, qId);
     }
     return (
         <>
@@ -25,9 +29,15 @@ const Question = (props) => {
                     return (
                         <div key={`answer-${index}`}
                             className="answer-child">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" />
-                                <label class="form-check-label" for="exampleRadios3">
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    id="exampleRadios3"
+                                    checked={a.isSelected}
+                                    onChange={(event) => handleHanleCheckbox(event, a.id, data.questionId)}
+                                />
+                                <label className="form-check-label" htmlFor="exampleRadios3">
                                     {a.description}
                                 </label>
                             </div>

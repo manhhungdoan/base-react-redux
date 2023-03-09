@@ -34,6 +34,7 @@ const DetailQuiz = (props) => {
                                 questionDescription = item.description;
                                 image = item.image;
                             }
+                            item.answers.isSelected = false;
                             answers.push(item.answers);
                         })
                         return { questionId: key, answers, questionDescription, image }
@@ -56,8 +57,25 @@ const DetailQuiz = (props) => {
             setIndex(index + 1)
         }
     }
-    console.log("check dataQuizLength:", dataQuiz.length)
-    // console.log("check data quiz", dataQuiz);
+    const handleCheckbox = (answerId, questionId) => {
+        let dataQuizClone = _.cloneDeep(dataQuiz); // React hook doesn't merge state
+        let question = dataQuizClone.find(item => +item.questionId === +questionId)
+        if (question && question.answers) {
+            question.answers = question.answers.map(item => {
+                if (+item.id === +answerId) {
+                    item.isSelected = !item.isSelected;
+                }
+                return item;
+            })
+        }
+        let index = dataQuizClone.findIndex(item => +item.questionId === +questionId);
+        if (index > -1) {
+            dataQuizClone[index] = question;
+            setDataQuiz(dataQuizClone);
+        }
+    }
+    // console.log("check dataQuizLength:", dataQuiz.length)
+    console.log("check data quiz", dataQuiz);
     return (
         <div className="detail-quiz-container">
             <div className="left-content">
@@ -70,6 +88,7 @@ const DetailQuiz = (props) => {
                 <div className="quiz-content">
                     <Question
                         index={index}
+                        handleCheckbox={handleCheckbox}
                         data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []
                         } />
                 </div>
