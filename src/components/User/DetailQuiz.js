@@ -74,8 +74,47 @@ const DetailQuiz = (props) => {
             setDataQuiz(dataQuizClone);
         }
     }
+    const handleFinish = () => {
+        // {
+        //     "quizId": 1,
+        //     "answers": [
+        //         { 
+        //             "questionId": 1,
+        //             "userAnswerId": [3]
+        //         },
+        //         { 
+        //             "questionId": 2,
+        //             "userAnswerId": [6]
+        //         }
+        //     ]
+        // }
+        let payload = {
+            quizId: +quizId,
+            answers: []
+        };
+        let answers = [];
+        if (dataQuiz && dataQuiz.length > 0) {
+            dataQuiz.forEach(question => {
+                let questionId = +question.questionId;
+                let userAnswerId = [];
+
+                //todo
+                question.answers.forEach(a => {
+                    if (a.isSelected === true) {
+                        userAnswerId.push(a.id)
+                    }
+                })
+                answers.push({
+                    questionId: +questionId,
+                    userAnswerId: userAnswerId
+                })
+            })
+        }
+        payload.answers = answers;
+        console.log("check payload: ", payload)
+    }
     // console.log("check dataQuizLength:", dataQuiz.length)
-    console.log("check data quiz", dataQuiz);
+    // console.log("check data quiz", dataQuiz);
     return (
         <div className="detail-quiz-container">
             <div className="left-content">
@@ -95,7 +134,7 @@ const DetailQuiz = (props) => {
                 <div className="footer">
                     <button className="btn btn-secondary" onClick={() => handlePrev()}>Prev</button>
                     <button className="btn btn-primary" onClick={() => handleNext()}>Next</button>
-
+                    <button className="btn btn-warning" onClick={() => handleFinish()}>Finish</button>
                 </div>
             </div>
             <div className="right-content">
