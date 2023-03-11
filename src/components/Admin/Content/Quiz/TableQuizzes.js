@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Table from 'react-bootstrap/Table';
-import './ManageQuiz.scss'
 import ModalDeleteQuiz from "./ModalDeleteQuiz";
 import ModalUpdateQuiz from "./ModalUpdateQuiz";
 
@@ -23,7 +22,7 @@ const TableQuizzes = (props) => {
             <div>List Quizzes:</div>
             <Table striped bordered hover>
                 <thead>
-                    <tr>
+                    <tr className="text-center">
                         <th>#</th>
                         <th>Quiz Name</th>
                         <th>Difficulty</th>
@@ -34,12 +33,12 @@ const TableQuizzes = (props) => {
                     {listQuizzes && listQuizzes.map((item, index) => {
                         return (
                             <tr key={`quiz-${item.id}`}>
-                                <td>{index + 1}</td>
-                                <td>{item.name}</td>
-                                <td className="text-center">{item.difficulty}</td>
+                                <td style={{ verticalAlign: "baseline", textAlign: "center" }}>{index + 1}</td>
+                                <td style={{ verticalAlign: "baseline" }}>{item.name}</td>
+                                <td style={{ verticalAlign: "baseline" }} className="text-center">{item.difficulty}</td>
                                 <td className="d-flex gap-2 align-items-center justify-content-center">
-                                    <button className="btn btn-warning" onClick={() => handleUpdateQuiz(item)}>Edit</button>
-                                    <button className="btn btn-danger" onClick={() => handleDeleteQuiz(item.id)}>Delete</button>
+                                    <button className="btn btn-warning col-4 col-md-4" onClick={() => handleUpdateQuiz(item)}>Edit</button>
+                                    <button className="btn btn-danger col-6 col-md-6 col-xl-4" onClick={() => handleDeleteQuiz(item.id)}>Delete</button>
                                 </td>
                             </tr>
                         )
