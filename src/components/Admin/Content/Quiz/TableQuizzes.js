@@ -1,16 +1,22 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import Table from 'react-bootstrap/Table';
 import './ManageQuiz.scss'
 import ModalDeleteQuiz from "./ModalDeleteQuiz";
+import ModalUpdateQuiz from "./ModalUpdateQuiz";
 
 const TableQuizzes = (props) => {
     const { listQuizzes, fectListQuizzes } = props;
     const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
+    const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
     const [deleteQuizData, setDeleteQuizData] = useState("");
+    const [updateQuizData, setUpdateQuizData] = useState({});
     const handleDeleteQuiz = (id) => {
         setShowModalDeleteQuiz(true);
         setDeleteQuizData(id);
+    }
+    const handleUpdateQuiz = (item) => {
+        setShowModalUpdateQuiz(true);
+        setUpdateQuizData(item);
     }
     return (
         <>
@@ -32,7 +38,7 @@ const TableQuizzes = (props) => {
                                 <td>{item.name}</td>
                                 <td className="text-center">{item.difficulty}</td>
                                 <td className="d-flex gap-2 align-items-center justify-content-center">
-                                    <button className="btn btn-warning">Edit</button>
+                                    <button className="btn btn-warning" onClick={() => handleUpdateQuiz(item)}>Edit</button>
                                     <button className="btn btn-danger" onClick={() => handleDeleteQuiz(item.id)}>Delete</button>
                                 </td>
                             </tr>
@@ -40,6 +46,12 @@ const TableQuizzes = (props) => {
                     })}
                 </tbody>
             </Table>
+            <ModalUpdateQuiz
+                show={showModalUpdateQuiz}
+                setShow={setShowModalUpdateQuiz}
+                updateQuizData={updateQuizData}
+                fectListQuizzes={fectListQuizzes}
+            />
             <ModalDeleteQuiz
                 show={showModalDeleteQuiz}
                 setShow={setShowModalDeleteQuiz}
