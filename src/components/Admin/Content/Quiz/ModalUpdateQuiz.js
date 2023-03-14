@@ -35,7 +35,6 @@ const ModalUpdateQuiz = (props) => {
         if (!_.isEmpty(updateQuizData)) {
             setQuizName(updateQuizData.name);
             setQuizDes(updateQuizData.description);
-            setType(updateQuizData.difficulty);
             if (updateQuizData.image) {
                 setPreviewing(`data:image/jpeg;base64,${updateQuizData.image}`)
             }

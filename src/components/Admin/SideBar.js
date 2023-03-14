@@ -61,7 +61,7 @@ const SideBar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                         >
                             <MenuItem>Quản Lý Users <Link to="/admin/manage-user/" /></MenuItem>
                             <MenuItem>Quản Lý Bài Quiz  <Link to="/admin/manage-quizzes/" /></MenuItem>
-                            <MenuItem>Quản Lý Câu Hỏi</MenuItem>
+                            <MenuItem>Quản Lý Câu Hỏi <Link to="/admin/manage-questions" /></MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>

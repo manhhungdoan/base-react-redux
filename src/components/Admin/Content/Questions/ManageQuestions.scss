@@ -1,0 +1,79 @@
+.manage-questions-container {
+
+    width: 95%;
+    margin: 0 auto;
+
+
+    .title {
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .btn-add {
+        width: 200px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+
+        .icon-add {
+            font-size: 18px;
+            color: rgb(255, 255, 255);
+        }
+
+    }
+
+    .content {
+        box-shadow: 0px 5px 13px -5px rgba(0, 0, 0, 0.39);
+        border-radius: 10px;
+        padding: 10px;
+
+        .questions-content {
+            .form-control {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                input {
+                    width: 40%;
+                }
+
+                #uploadCaptureInputFile {
+                    width: 34.5%;
+                }
+
+                .icon-remove {
+                    font-size: 24px;
+                    color: red;
+                }
+            }
+        }
+
+        .answers-content {
+            width: 85%;
+            margin: 0 auto;
+
+            .form-control {
+                display: flex;
+                gap: 10px;
+                border: none;
+
+                .input-group {
+                    border: 1px solid rgb(224, 224, 224);
+                    border-radius: 5px;
+                }
+
+                .icon-add {
+                    font-size: 24px;
+                    color: green;
+                }
+
+                .icon-remove {
+                    font-size: 24px;
+                    color: red;
+                }
+            }
+        }
+    }
+
+}

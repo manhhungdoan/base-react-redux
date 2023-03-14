@@ -28,7 +28,7 @@ const ManageQuiz = (props) => {
             setListQuizzes(res.DT);
         }
     }
-
+    console.log("check type---", type)
     const handleUploadImage = (event) => {
         // console.log("upload file", event.target.files[0])
         if (event.target && event.target.files && event.target.files[0]) {
